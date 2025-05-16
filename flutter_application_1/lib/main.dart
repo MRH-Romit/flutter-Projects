@@ -7,13 +7,20 @@ void main() {
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
-
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Todo List App',
       theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.teal),
+        colorScheme: ColorScheme.fromSeed(
+          seedColor: Colors.blue,
+          primary: Colors.blue.shade700,
+        ),
+        appBarTheme: AppBarTheme(
+          backgroundColor: Colors.blue.shade600,
+          foregroundColor: Colors.white,
+          elevation: 4,
+        ),
         useMaterial3: true,
       ),
       home: const MyHomePage(title: 'Todo List App'),
@@ -93,12 +100,13 @@ class _MyHomePageState extends State<MyHomePage> {
         );
       },
     );
-  }
-  @override
+  }  @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Theme.of(context).colorScheme.inversePrimary,
+        backgroundColor: Theme.of(context).appBarTheme.backgroundColor,
+        foregroundColor: Theme.of(context).appBarTheme.foregroundColor,
+        elevation: Theme.of(context).appBarTheme.elevation,
         title: Text(widget.title),
       ),
       body: _todos.isEmpty
@@ -132,10 +140,11 @@ class _MyHomePageState extends State<MyHomePage> {
                   ),
                 );
               },
-            ),
-      floatingActionButton: FloatingActionButton(
+            ),      floatingActionButton: FloatingActionButton(
         onPressed: _displayDialog,
         tooltip: 'Add Task',
+        backgroundColor: Colors.blue.shade700,
+        foregroundColor: Colors.white,
         child: const Icon(Icons.add),
       ),
     );
