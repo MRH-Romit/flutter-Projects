@@ -44,10 +44,12 @@ class _MyHomePageState extends State<MyHomePage> {
   void _addTodoItem(String title) {
     if (title.isNotEmpty) {
       setState(() {
-        _todos.add(Todo(
-          id: DateTime.now().millisecondsSinceEpoch.toString(),
-          title: title,
-        ));
+        _todos.add(
+          Todo(
+            id: DateTime.now().millisecondsSinceEpoch.toString(),
+            title: title,
+          ),
+        );
       });
       _textFieldController.clear();
     }
@@ -100,7 +102,9 @@ class _MyHomePageState extends State<MyHomePage> {
         );
       },
     );
-  }  @override
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
@@ -109,38 +113,41 @@ class _MyHomePageState extends State<MyHomePage> {
         elevation: Theme.of(context).appBarTheme.elevation,
         title: Text(widget.title),
       ),
-      body: _todos.isEmpty
-          ? const Center(
-              child: Text(
-                'No tasks yet! Add some tasks.',
-                style: TextStyle(fontSize: 18),
-              ),
-            )
-          : ListView.builder(
-              itemCount: _todos.length,
-              itemBuilder: (context, index) {
-                final todo = _todos[index];
-                return ListTile(
-                  onTap: () => _toggleTodo(todo.id),
-                  leading: Checkbox(
-                    value: todo.isDone,
-                    onChanged: (_) => _toggleTodo(todo.id),
-                  ),
-                  title: Text(
-                    todo.title,
-                    style: TextStyle(
-                      decoration: todo.isDone
-                          ? TextDecoration.lineThrough
-                          : TextDecoration.none,
+      body:
+          _todos.isEmpty
+              ? const Center(
+                child: Text(
+                  'No tasks yet! Add some tasks.',
+                  style: TextStyle(fontSize: 18),
+                ),
+              )
+              : ListView.builder(
+                itemCount: _todos.length,
+                itemBuilder: (context, index) {
+                  final todo = _todos[index];
+                  return ListTile(
+                    onTap: () => _toggleTodo(todo.id),
+                    leading: Checkbox(
+                      value: todo.isDone,
+                      onChanged: (_) => _toggleTodo(todo.id),
                     ),
-                  ),
-                  trailing: IconButton(
-                    icon: const Icon(Icons.delete),
-                    onPressed: () => _deleteTodo(todo.id),
-                  ),
-                );
-              },
-            ),      floatingActionButton: FloatingActionButton(
+                    title: Text(
+                      todo.title,
+                      style: TextStyle(
+                        decoration:
+                            todo.isDone
+                                ? TextDecoration.lineThrough
+                                : TextDecoration.none,
+                      ),
+                    ),
+                    trailing: IconButton(
+                      icon: const Icon(Icons.delete),
+                      onPressed: () => _deleteTodo(todo.id),
+                    ),
+                  );
+                },
+              ),
+      floatingActionButton: FloatingActionButton(
         onPressed: _displayDialog,
         tooltip: 'Add Task',
         backgroundColor: Colors.blue.shade700,
