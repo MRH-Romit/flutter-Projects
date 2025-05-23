@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import '../widgets/quiz_logo.dart';
 import '../widgets/welcome_text.dart';
 import '../widgets/start_quiz_button.dart';
+import 'quiz_screen.dart';
 
 class WelcomeScreen extends StatelessWidget {
   final VoidCallback onStartQuiz;
@@ -20,7 +21,14 @@ class WelcomeScreen extends StatelessWidget {
               const SizedBox(height: 32),
               const WelcomeText(),
               const SizedBox(height: 32),
-              StartQuizButton(onPressed: onStartQuiz),
+              StartQuizButton(
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (_) => const QuizScreen()),
+                  );
+                },
+              ),
             ],
           ),
         ),

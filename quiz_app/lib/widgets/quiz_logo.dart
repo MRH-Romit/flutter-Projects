@@ -10,7 +10,7 @@ class QuizLogo extends StatelessWidget {
       width: 150,
       height: 150,
       fit: BoxFit.contain,
-      color: const Color.fromARGB(255, 9, 229, 83), // Apply green color
+      color: const Color.fromARGB(255, 22, 22, 22), // Apply green color
       colorBlendMode: BlendMode.srcIn, // Use srcIn to tint the image
       errorBuilder: (context, error, stackTrace) {
         print('Error loading image: $error');
