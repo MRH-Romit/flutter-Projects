@@ -45,6 +45,16 @@ class _QuizAppState extends State<QuizApp> {
 
   @override
   Widget build(BuildContext context) {
+    final signInScreen = SignInScreen(
+      onSignUpTap: _goToSignUp,
+      onSignInSuccess: _onAuthSuccess,
+    );
+    final signUpScreen = SignUpScreen(
+      onSignInTap: _goToSignIn,
+      onSignUpSuccess: _onAuthSuccess,
+    );
+    final welcomeScreen = WelcomeScreen(onStartQuiz: _startQuiz);
+
     return MaterialApp(
       title: 'Quiz App',
       theme: ThemeData(
@@ -53,15 +63,9 @@ class _QuizAppState extends State<QuizApp> {
       ),
       home: !_signedIn
           ? (_showSignUp
-              ? SignUpScreen(
-                  onSignInTap: _goToSignIn,
-                  onSignUpSuccess: _onAuthSuccess,
-                )
-              : SignInScreen(
-                  onSignUpTap: _goToSignUp,
-                  onSignInSuccess: _onAuthSuccess,
-                ))
-          : WelcomeScreen(onStartQuiz: _startQuiz),
+              ? signUpScreen
+              : signInScreen)
+          : welcomeScreen,
     );
   }
 }
